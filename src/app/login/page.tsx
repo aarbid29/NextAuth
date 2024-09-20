@@ -12,7 +12,7 @@ export default function LoginPage() {
   });
   const [loading, setLoading] = React.useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
