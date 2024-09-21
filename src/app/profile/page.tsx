@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [data, setData] = useState(null); // Initialize with null
+  const [data, setData] = useState(null);
 
   const logout = async () => {
     try {
