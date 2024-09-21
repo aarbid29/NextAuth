@@ -1,4 +1,3 @@
-import { TokenData } from "@/helpers/TokenData";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/userModel";
 import { connect } from "@/dbConfig/dbConfig";

@@ -4,31 +4,26 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-export default function SignupPage() {
+export default function ForgotPassword() {
   const router = useRouter(); // to push/navigate into a page
 
   const [user, setUser] = React.useState({
     email: "",
-    password: "",
-    username: "",
   });
-  const [loading, setLoading] = React.useState(false);
-
   const handleChange = (e: any) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  const [loading, setLoading] = React.useState(false);
 
-  const onSignup = async () => {
+  const onReset = async () => {
     try {
       setLoading(true);
 
-      console.log("Signup details:", user);
-
-      await axios.post("/api/users/signup", user);
+      await axios.post("/api/users/resetPassword", user);
 
       router.push("/login");
     } catch (error: any) {
-      console.log("error occured while signing up");
+      console.log("error occured while resseting");
     } finally {
       setLoading(false);
     }
@@ -37,16 +32,9 @@ export default function SignupPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-2xl font-bold">
-        {loading ? "Processing..." : "Sign Up"}
+        {loading ? "Processing..." : "Reset Password"}
       </h1>
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        value={user.username}
-        onChange={handleChange}
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-      />
+
       <input
         type="email"
         name="email"
@@ -55,33 +43,20 @@ export default function SignupPage() {
         onChange={handleChange}
         className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
       />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={user.password}
-        onChange={handleChange}
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-      />
+
       <button
-        onClick={onSignup}
+        onClick={onReset}
         disabled={loading}
         className={`p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 ${
           loading ? "bg-gray-300 cursor-not-allowed" : ""
         }`}
       >
-        {loading ? "Signing Up..." : "Sign Up"}
+        {loading ? "Loading" : "Reset Password"}
       </button>
       <p>
         Already have an account?{" "}
         <Link href="/login" className="text-blue-500">
           Login
-        </Link>
-      </p>
-      <p>
-        Forgot Password?{" "}
-        <Link href="/forgotpassword" className="text-blue-500">
-          Reset Password
         </Link>
       </p>
     </div>
